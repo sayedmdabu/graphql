@@ -1,0 +1,61 @@
+query getUser($user1_id:Int = 1,$user2_id:Int = 2,){
+    User1: user(id: $user1_id) {
+      ...userFields
+    }
+    User2: user(id: $user2_id) {
+      ...userFields
+    }
+  }
+  
+  fragment userFields on Person {
+    name
+    email
+  }
+
+-----------------------------------------------------
+
+{
+  User1: user(id: 1) {
+    ...userFields
+  }
+  User2: user(id: 2) {
+    ...userFields
+  }
+  User3: user(id: 3) {
+    ...userFields
+  }
+}
+
+fragment userFields on Person {
+  name
+  email
+}
+
+
+---------------------------------------------------------
+
+mutation{
+  # createSpace(name: "Hotel1", rent: "$15"){
+  #   name
+  #   rent
+  # }
+  updateSpace(id:2, input:{
+    name:"update Hotel" 
+    rent:"$15"
+  }){
+    name
+    rent
+  }
+}
+
+-------------------------------------------------------
+
+query{
+  getSpace(id:2){
+    name
+    rent
+  }
+}
+
+
+------------------------------------------------------
